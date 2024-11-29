@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guessing game</title>
+    <style>
+      body {
+        text-align: center;
+        margin: 50px;
+      }
+      .inputfield {
+        border: none;
+        background-color: rgb(236, 224, 224);
+        padding: 15px 20px;
+        border-radius: 10px;
+        outline-color: blueviolet;
+      }
+      .btn {
+        border: none;
+        background-color: blue;
+        color: white;
+        font-size: 18px;
+        padding: 4px 10px;
+        border-radius: 10px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Guess the number between 1 and 100</h1>
+    <form>
+      <div>
+        <input
+          class="inputfield"
+          type="number"
+          id="guessNumber"
+          placeholder="Enter your guess"
+        />
+      </div>
+      <div>
+        <button class="btn" id="submitGuess">Submit</button>
+      </div>
+    </form>
+
+    <p id="feedback"></p>
+    <p id="random"></p>
+
+    <script>
+      //random number generate
+      let randomNumber = Math.floor(Math.random() * 10) + 1;
+
+      // DOM Elements
+      const guessNumber = document.getElementById("guessNumber");
+      const submitGuess = document.getElementById("submitGuess");
+      const feedback = document.getElementById("feedback");
+      const displaynumber = document.getElementById("random");
+      const button = document.getElementById("submitGuess");
+
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        const userGuess = Number(guessNumber.value);
+
+        if (!userGuess || userGuess < 0 || userGuess > 10) {
+          feedback.textContent = "Enter number between 1 to 10";
+          feedback.style.color = "red";
+          return;
+        } else {
+          if (userGuess == randomNumber) {
+            feedback.textContent = "Congratulation! you guessed Right number";
+            feedback.style.color = "green";
+            displaynumber.textContent = `The Random number is ${randomNumber}`;
+
+            console.log("Random number:", randomNumber);
+          } else {
+            feedback.textContent =
+              "Oops! you failed to guess the number,try again!";
+            feedback.style.color = "red";
+            displaynumber.textContent = `The Random number is ${randomNumber}`;
+          }
+        }
+        randomNumber = Math.floor(Math.random() * 10) + 1;
+      });
+    </script>
+  </body>
+</html>
